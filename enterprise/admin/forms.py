@@ -575,3 +575,19 @@ class TransmitEnterpriseCoursesForm(forms.Form):
             )
 
         return channel_worker_username
+
+
+class UserRoleAssignmentAdminForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(UserRoleAssignmentAdminForm, self).__init__(*args, **kwargs)
+        self.fields['user'].widget = forms.widgets.EmailInput()
+
+    def clean_user(self):
+        user_email = self.cleaned_data['user']
+
+        try:
+            user = User.objects.get(email=user_email)
+        except User.DoesNotExist:
+            raise ValidationError('User with email {} does not exist'.format(user_email))
+
+        return user
