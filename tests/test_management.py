@@ -1093,6 +1093,7 @@ class TestUnlinkSAPLearnersManagementCommand(unittest.TestCase, EnterpriseMockMi
             'Processing learners to unlink inactive users using configuration: '
             '[<SAPSuccessFactorsEnterpriseCustomerConfiguration for Enterprise Veridian Dynamics>]',
             '''SAP searchStudent API returned response with error message "The property 'InvalidProperty', used in '''
-            '''a query expression, is not defined in type 'com.sap.lms.odata.Student'." and with error code "None".'''
+            '''a query expression, is not defined in type 'com.sap.lms.odata.Student'." and with error code "None".''',
+            'Enterprise customer {Veridian Dynamics} has no SAPSF inactive learners',
         ]
         self.assert_info_logs_sap_learners_unlink(expected_messages)

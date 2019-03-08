@@ -99,6 +99,13 @@ class SapSuccessFactorsLearnerManger(object):
         """
         sap_inactive_learners = self.client.get_inactive_sap_learners()
         enterprise_customer = self.enterprise_configuration.enterprise_customer
+        if not sap_inactive_learners:
+            LOGGER.info(
+                'Enterprise customer {%s} has no SAPSF inactive learners',
+                enterprise_customer.name
+            )
+            return
+
         try:
             tpa_provider = enterprise_customer.enterprise_customer_identity_provider.provider_id
         except EnterpriseCustomer.enterprise_customer_identity_provider.RelatedObjectDoesNotExist:
